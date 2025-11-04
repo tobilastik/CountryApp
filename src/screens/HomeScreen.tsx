@@ -1,14 +1,12 @@
 import React from 'react';
-import {
-    View,
-    FlatList,
-    StyleSheet,
-    ActivityIndicator,
-    Text,
-} from 'react-native';
+import { View, FlatList, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useCountries } from '../hooks/useCountries';
+import { useSearch } from '../hooks/useSearch';
 import { CountryItem } from '../components/CountryItem';
+import { Loader } from '../components/Loader';
+import { ErrorView } from '../components/ErrorView';
+import { SearchBar } from '../components/SearchBar';
 import { Country } from '../api/types';
 import { useTheme } from '../hooks/useTheme';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -25,7 +23,8 @@ interface HomeScreenProps {
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const theme = useTheme();
-    const { countries, isLoading, isError, error } = useCountries();
+    const { countries, isLoading, isError, error, refetch } = useCountries();
+    const { searchTerm, setSearchTerm, filteredCountries } = useSearch(countries);
 
     const handleCountryPress = (country: Country) => {
         navigation.navigate('Detail', { country });
@@ -37,41 +36,15 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
     const renderEmptyList = () => {
         if (isLoading) {
-            return (
-                <View style={styles.centerContainer}>
-                    <ActivityIndicator size="large" color={theme.colors.primary} />
-                    <Text
-                        style={[
-                            theme.typography.textStyles.body,
-                            { color: theme.colors.textSecondary, marginTop: theme.spacing[4] },
-                        ]}
-                    >
-                        Loading countries...
-                    </Text>
-                </View>
-            );
+            return <Loader message="Loading countries..." />;
         }
 
         if (isError) {
             return (
-                <View style={styles.centerContainer}>
-                    <Text
-                        style={[
-                            theme.typography.textStyles.h2,
-                            { color: theme.colors.error, marginBottom: theme.spacing[2] },
-                        ]}
-                    >
-                        Error loading countries
-                    </Text>
-                    <Text
-                        style={[
-                            theme.typography.textStyles.body,
-                            { color: theme.colors.textSecondary },
-                        ]}
-                    >
-                        {error?.message || 'Something went wrong'}
-                    </Text>
-                </View>
+                <ErrorView
+                    message={error?.message || 'Something went wrong'}
+                    onRetry={refetch}
+                />
             );
         }
 
@@ -83,7 +56,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                         { color: theme.colors.textSecondary },
                     ]}
                 >
-                    No countries found
+                    {searchTerm ? 'No countries found' : 'No countries available'}
                 </Text>
             </View>
         );
@@ -94,13 +67,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             style={[styles.container, { backgroundColor: theme.colors.background }]}
             edges={['top']}
         >
+            <SearchBar value={searchTerm} onChangeText={setSearchTerm} />
             <FlatList
-                data={countries}
+                data={filteredCountries}
                 renderItem={renderCountryItem}
                 keyExtractor={item => item.cca2}
                 contentContainerStyle={[
                     styles.listContent,
-                    countries.length === 0 && styles.emptyListContent,
+                    filteredCountries.length === 0 && styles.emptyListContent,
                 ]}
                 ListEmptyComponent={renderEmptyList}
                 showsVerticalScrollIndicator={false}
