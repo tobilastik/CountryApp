@@ -14,6 +14,7 @@ export const CountryItem: React.FC<CountryItemProps> = ({ country, onPress }) =>
 
   return (
     <TouchableOpacity
+      testID="country-item"
       style={[
         styles.container,
         {
@@ -26,6 +27,7 @@ export const CountryItem: React.FC<CountryItemProps> = ({ country, onPress }) =>
     >
       <View style={styles.flagContainer}>
         <Image
+          testID="country-flag"
           source={{ uri: country.flags.png }}
           style={styles.flag}
           resizeMode="cover"
@@ -34,6 +36,7 @@ export const CountryItem: React.FC<CountryItemProps> = ({ country, onPress }) =>
 
       <View style={styles.infoContainer}>
         <Text
+          testID="country-name"
           style={[
             theme.typography.textStyles.h3,
             { color: theme.colors.text },

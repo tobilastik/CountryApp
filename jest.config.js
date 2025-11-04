@@ -12,4 +12,7 @@ module.exports = {
     '!src/**/*.stories.{ts,tsx}',
     '!src/**/__tests__/**',
   ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(react-native|@react-native|@react-navigation|@tanstack)/)',
+  ],
 };

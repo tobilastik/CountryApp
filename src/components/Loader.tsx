@@ -11,7 +11,11 @@ export const Loader: React.FC<LoaderProps> = ({ message }) => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={theme.colors.primary} />
+      <ActivityIndicator
+        testID="activity-indicator"
+        size="large"
+        color={theme.colors.primary}
+      />
       {message && (
         <Text
           style={[

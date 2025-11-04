@@ -13,6 +13,8 @@ export const DetailScreen: React.FC = () => {
   const route = useRoute<DetailScreenRouteProp>();
   const { country } = route.params;
 
+  console.log('country', country);
+
   const capital = country.capital?.[0] || 'N/A';
 
   return (
@@ -26,6 +28,7 @@ export const DetailScreen: React.FC = () => {
       >
         <View style={styles.flagContainer}>
           <Image
+            testID="country-flag-detail"
             source={{ uri: country.flags.png }}
             style={styles.flag}
             resizeMode="cover"

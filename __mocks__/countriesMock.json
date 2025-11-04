@@ -1,5 +1,53 @@
-{
-  "description": "Mock data for European countries",
-  "countries": []
-}
-
+[
+  {
+    "name": {
+      "common": "France",
+      "official": "French Republic"
+    },
+    "capital": ["Paris"],
+    "population": 67391582,
+    "area": 551695,
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "flags": {
+      "png": "https://flagcdn.com/w320/fr.png",
+      "svg": "https://flagcdn.com/fr.svg"
+    },
+    "cca2": "FR",
+    "cca3": "FRA"
+  },
+  {
+    "name": {
+      "common": "Germany",
+      "official": "Federal Republic of Germany"
+    },
+    "capital": ["Berlin"],
+    "population": 83240525,
+    "area": 357114,
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "flags": {
+      "png": "https://flagcdn.com/w320/de.png",
+      "svg": "https://flagcdn.com/de.svg"
+    },
+    "cca2": "DE",
+    "cca3": "DEU"
+  },
+  {
+    "name": {
+      "common": "Italy",
+      "official": "Italian Republic"
+    },
+    "capital": ["Rome"],
+    "population": 59554023,
+    "area": 301336,
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "flags": {
+      "png": "https://flagcdn.com/w320/it.png",
+      "svg": "https://flagcdn.com/it.svg"
+    },
+    "cca2": "IT",
+    "cca3": "ITA"
+  }
+]
