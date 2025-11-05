@@ -4,7 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import { useTheme } from '../hooks/useTheme';
-import { formatPopulation, formatArea } from '../utils/helpers';
+import { formatNumber, formatArea } from '../utils/helpers';
+import { Theme } from '../theme';
 
 type DetailScreenRouteProp = RouteProp<RootStackParamList, 'Detail'>;
 
@@ -12,8 +13,6 @@ export const DetailScreen: React.FC = () => {
   const theme = useTheme();
   const route = useRoute<DetailScreenRouteProp>();
   const { country } = route.params;
-
-  console.log('country', country);
 
   const capital = country.capital?.[0] || 'N/A';
 
@@ -62,7 +61,7 @@ export const DetailScreen: React.FC = () => {
           />
           <DetailRow
             label="Population"
-            value={formatPopulation(country.population)}
+            value={formatNumber(country.population)}
             theme={theme}
           />
           <DetailRow
@@ -89,7 +88,7 @@ export const DetailScreen: React.FC = () => {
 interface DetailRowProps {
   label: string;
   value: string;
-  theme: any;
+  theme: Theme;
 }
 
 const DetailRow: React.FC<DetailRowProps> = ({ label, value, theme }) => (

@@ -1,18 +1,11 @@
-import { useState, useMemo } from 'react';
-import { Country } from '../api/types';
-import { filterCountriesByName } from '../utils/helpers';
+import { useState } from 'react';
 
-export const useSearch = (countries: Country[]) => {
+export const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredCountries = useMemo(() => {
-    return filterCountriesByName(countries, searchTerm);
-  }, [countries, searchTerm]);
 
   return {
     searchTerm,
     setSearchTerm,
-    filteredCountries,
   };
 };
 

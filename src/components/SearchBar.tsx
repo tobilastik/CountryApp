@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import { TextInput, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { useTheme } from '../hooks/useTheme';
 
 interface SearchBarProps {
@@ -15,6 +16,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const theme = useTheme();
 
+  const handleClear = () => {
+    onChangeText('');
+  };
+
   return (
     <View
       style={[
@@ -26,6 +31,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       ]}
     >
       <TextInput
+        testID="search-input"
         style={[
           theme.typography.textStyles.body,
           { color: theme.colors.text },
@@ -38,21 +44,40 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         autoCapitalize="none"
         autoCorrect={false}
       />
+      {value.length > 0 && (
+        <TouchableOpacity
+          testID="search-clear"
+          onPress={handleClear}
+          style={styles.clearButton}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <Icon
+            name="close-circle"
+            size={20}
+            color={theme.colors.textSecondary}
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
-    marginVertical: 8,
+    flex: 1,
+    height: 48,
     borderRadius: 12,
     borderWidth: 1,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
-    padding: 0,
+    flex: 1,
+  },
+  clearButton: {
+    marginLeft: 8,
+    padding: 4,
   },
 });
 

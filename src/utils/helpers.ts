@@ -1,9 +1,7 @@
+import { Country } from '../api/types';
+
 export const formatNumber = (num: number): string => {
   return num.toLocaleString('en-US');
-};
-
-export const formatPopulation = (population: number): string => {
-  return formatNumber(population);
 };
 
 export const formatArea = (area: number): string => {
@@ -11,9 +9,9 @@ export const formatArea = (area: number): string => {
 };
 
 export const filterCountriesByName = (
-  countries: any[],
+  countries: Country[],
   searchTerm: string,
-): any[] => {
+): Country[] => {
   if (!searchTerm.trim()) {
     return countries;
   }

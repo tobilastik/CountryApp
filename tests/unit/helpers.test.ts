@@ -1,6 +1,5 @@
 import {
   formatNumber,
-  formatPopulation,
   formatArea,
   filterCountriesByName,
 } from '../../src/utils/helpers';
@@ -21,13 +20,6 @@ describe('helpers', () => {
       expect(formatNumber(0)).toBe('0');
       expect(formatNumber(42)).toBe('42');
       expect(formatNumber(999)).toBe('999');
-    });
-  });
-
-  describe('formatPopulation', () => {
-    it('should format population number', () => {
-      expect(formatPopulation(67391582)).toBe('67,391,582');
-      expect(formatPopulation(1000000)).toBe('1,000,000');
     });
   });
 

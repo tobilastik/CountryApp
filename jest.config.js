@@ -6,6 +6,9 @@ module.exports = {
       '<rootDir>/__mocks__/fileMock.js',
   },
   testMatch: ['**/__tests__/**/*.test.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+  ],
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
@@ -13,6 +16,6 @@ module.exports = {
     '!src/**/__tests__/**',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|@react-navigation|@tanstack)/)',
+    'node_modules/(?!(react-native|@react-native|@react-navigation|@tanstack|react-native-vector-icons)/)',
   ],
 };

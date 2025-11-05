@@ -50,9 +50,10 @@ describe('CountryItem', () => {
     const { getByTestId } = render(
       <CountryItem country={mockCountry} onPress={onPress} />,
     );
-    const touchable = getByTestId('country-item');
+    const touchable = getByTestId(`country-item-${mockCountry.cca2}`);
     fireEvent.press(touchable);
     expect(onPress).toHaveBeenCalledTimes(1);
+    expect(onPress).toHaveBeenCalledWith(mockCountry);
   });
 });
 

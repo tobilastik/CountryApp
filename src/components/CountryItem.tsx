@@ -5,16 +5,16 @@ import { useTheme } from '../hooks/useTheme';
 
 interface CountryItemProps {
   country: Country;
-  onPress: () => void;
+  onPress: (country: Country) => void;
 }
 
-export const CountryItem: React.FC<CountryItemProps> = ({ country, onPress }) => {
+const CountryItemComponent: React.FC<CountryItemProps> = ({ country, onPress }) => {
   const theme = useTheme();
   const capital = country.capital?.[0] || 'N/A';
 
   return (
     <TouchableOpacity
-      testID="country-item"
+      testID={`country-item-${country.cca2}`}
       style={[
         styles.container,
         {
@@ -22,7 +22,7 @@ export const CountryItem: React.FC<CountryItemProps> = ({ country, onPress }) =>
           borderColor: theme.colors.border,
         },
       ]}
-      onPress={onPress}
+      onPress={() => onPress(country)}
       activeOpacity={0.7}
     >
       <View style={styles.flagContainer}>
@@ -88,4 +88,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
 });
+
+export const CountryItem = React.memo(CountryItemComponent);
 

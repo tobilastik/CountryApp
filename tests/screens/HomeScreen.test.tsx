@@ -80,12 +80,13 @@ describe('HomeScreen', () => {
       refetch: jest.fn(),
     });
 
-    const { getAllByTestId } = renderWithProviders(
+    const { getByTestId } = renderWithProviders(
       <HomeScreen navigation={mockNavigation as any} />,
     );
 
-    const countryItems = getAllByTestId('country-item');
-    fireEvent.press(countryItems[0]);
+    const firstCountryCode = countriesMock[0].cca2;
+    const countryItem = getByTestId(`country-item-${firstCountryCode}`);
+    fireEvent.press(countryItem);
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('Detail', {
       country: countriesMock[0],

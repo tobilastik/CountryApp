@@ -1,12 +1,6 @@
 export interface CountryName {
   common: string;
   official: string;
-  nativeName?: {
-    [key: string]: {
-      official: string;
-      common: string;
-    };
-  };
 }
 
 export interface CountryFlags {
@@ -23,18 +17,8 @@ export interface Country {
   region: string;
   subregion: string;
   flags: CountryFlags;
-  cca2: string; // Country code (2 letters)
-  cca3: string; // Country code (3 letters)
-  currencies?: {
-    [key: string]: {
-      name: string;
-      symbol: string;
-    };
-  };
-  languages?: {
-    [key: string]: string;
-  };
-  borders?: string[];
+  cca2: string;
+  cca3: string;
 }
 
 export interface ApiError {
