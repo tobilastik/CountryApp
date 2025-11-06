@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-native';
-import { useSearch } from '../../src/hooks/useSearch';
+import { useSearch } from '../useSearch';
 
 describe('useSearch', () => {
   it('should initialize with empty search term', () => {
@@ -32,3 +32,4 @@ describe('useSearch', () => {
     expect(result.current.searchTerm).toBe('');
   });
 });
+

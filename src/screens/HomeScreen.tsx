@@ -51,8 +51,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         [handleCountryPress],
     );
 
-    const keyExtractor = useCallback((item: Country) => item.cca2, []);
-
     const renderEmptyList = () => {
         if (isLoading) {
             return <Loader message="Loading countries..." />;
@@ -110,7 +108,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 testID="countries-list"
                 data={displayCountries}
                 renderItem={renderCountryItem}
-                keyExtractor={keyExtractor}
+                keyExtractor={(item) => item.cca3}
                 contentContainerStyle={[
                     styles.listContent,
                     displayCountries.length === 0 && styles.emptyListContent,

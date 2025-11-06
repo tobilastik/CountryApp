@@ -1,12 +1,14 @@
 import React from 'react';
 import { render, waitFor, fireEvent } from '@testing-library/react-native';
-import { HomeScreen } from '../../src/screens/HomeScreen';
-import { useCountries } from '../../src/hooks/useCountries';
-import { createMockNavigation } from '../utils/testUtils';
-import { renderWithProviders } from '../utils/testUtils';
-import countriesMock from '../../__mocks__/countriesMock.json';
+import { HomeScreen } from '../HomeScreen';
+import { useCountries } from '../../hooks/useCountries';
+import { createMockNavigation, renderWithProviders } from '../../utils/testUtils';
+import { Country } from '../../api/types';
+import countriesMock from '../../../__mocks__/countriesMock.json';
 
-jest.mock('../../src/hooks/useCountries');
+const mockCountries = countriesMock as Country[];
+
+jest.mock('../../hooks/useCountries');
 
 const mockUseCountries = useCountries as jest.MockedFunction<
   typeof useCountries
@@ -29,7 +31,7 @@ describe('HomeScreen', () => {
     });
 
     const { getByText } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
     expect(getByText('Loading countries...')).toBeTruthy();
@@ -46,7 +48,7 @@ describe('HomeScreen', () => {
     });
 
     const { getByText } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
     expect(getByText('Error loading countries')).toBeTruthy();
@@ -55,7 +57,7 @@ describe('HomeScreen', () => {
 
   it('should render countries list', () => {
     mockUseCountries.mockReturnValue({
-      countries: countriesMock as any,
+      countries: mockCountries,
       isLoading: false,
       isError: false,
       error: null,
@@ -63,7 +65,7 @@ describe('HomeScreen', () => {
     });
 
     const { getByText } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
     expect(getByText('France')).toBeTruthy();
@@ -73,7 +75,7 @@ describe('HomeScreen', () => {
 
   it('should navigate to detail screen on country press', () => {
     mockUseCountries.mockReturnValue({
-      countries: countriesMock as any,
+      countries: mockCountries,
       isLoading: false,
       isError: false,
       error: null,
@@ -81,21 +83,21 @@ describe('HomeScreen', () => {
     });
 
     const { getByTestId } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
-    const firstCountryCode = countriesMock[0].cca2;
+    const firstCountryCode = mockCountries[0].cca2;
     const countryItem = getByTestId(`country-item-${firstCountryCode}`);
     fireEvent.press(countryItem);
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('Detail', {
-      country: countriesMock[0],
+      country: mockCountries[0],
     });
   });
 
   it('should render search bar', () => {
     mockUseCountries.mockReturnValue({
-      countries: countriesMock as any,
+      countries: mockCountries,
       isLoading: false,
       isError: false,
       error: null,
@@ -103,7 +105,7 @@ describe('HomeScreen', () => {
     });
 
     const { getByPlaceholderText } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
     expect(getByPlaceholderText('Search countries...')).toBeTruthy();
@@ -111,7 +113,7 @@ describe('HomeScreen', () => {
 
   it('should filter countries when search term is entered', () => {
     mockUseCountries.mockReturnValue({
-      countries: countriesMock as any,
+      countries: mockCountries,
       isLoading: false,
       isError: false,
       error: null,
@@ -119,7 +121,7 @@ describe('HomeScreen', () => {
     });
 
     const { getByPlaceholderText, getByText, queryByText } = renderWithProviders(
-      <HomeScreen navigation={mockNavigation as any} />,
+      <HomeScreen navigation={mockNavigation} />,
     );
 
     const searchInput = getByPlaceholderText('Search countries...');

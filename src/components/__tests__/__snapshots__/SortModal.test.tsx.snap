@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortModal should match snapshot when visible 1`] = `null`;
+
+exports[`SortModal should match snapshot with selected sort 1`] = `null`;

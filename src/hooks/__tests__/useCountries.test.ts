@@ -1,15 +1,18 @@
 import { renderHook, waitFor } from '@testing-library/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import { useCountries } from '../../src/hooks/useCountries';
-import { fetchEuropeanCountries } from '../../src/api/countryApi';
-import countriesMock from '../../__mocks__/countriesMock.json';
+import { useCountries } from '../useCountries';
+import { fetchEuropeanCountries } from '../../api/countryApi';
+import { Country } from '../../api/types';
+import countriesMock from '../../../__mocks__/countriesMock.json';
 
-jest.mock('../../src/api/countryApi');
+jest.mock('../../api/countryApi');
 
 const mockFetchEuropeanCountries = fetchEuropeanCountries as jest.MockedFunction<
   typeof fetchEuropeanCountries
 >;
+
+const mockCountries = countriesMock as Country[];
 
 const wrapper = ({ children }: { children: React.ReactNode }) => {
   const queryClient = new QueryClient({
@@ -29,7 +32,7 @@ describe('useCountries', () => {
   });
 
   it('should return loading state initially', () => {
-    mockFetchEuropeanCountries.mockResolvedValueOnce(countriesMock as any);
+    mockFetchEuropeanCountries.mockResolvedValueOnce(mockCountries);
 
     const { result } = renderHook(() => useCountries(), { wrapper });
 
@@ -38,7 +41,7 @@ describe('useCountries', () => {
   });
 
   it('should return countries when data is loaded', async () => {
-    mockFetchEuropeanCountries.mockResolvedValueOnce(countriesMock as any);
+    mockFetchEuropeanCountries.mockResolvedValueOnce(mockCountries);
 
     const { result } = renderHook(() => useCountries(), { wrapper });
 
@@ -46,7 +49,7 @@ describe('useCountries', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    expect(result.current.countries).toEqual(countriesMock);
+    expect(result.current.countries).toEqual(mockCountries);
     expect(result.current.isError).toBe(false);
   });
 
@@ -67,7 +70,7 @@ describe('useCountries', () => {
   });
 
   it('should provide refetch function', async () => {
-    mockFetchEuropeanCountries.mockResolvedValueOnce(countriesMock as any);
+    mockFetchEuropeanCountries.mockResolvedValueOnce(mockCountries);
 
     const { result } = renderHook(() => useCountries(), { wrapper });
 

@@ -2,9 +2,9 @@ import {
   formatNumber,
   formatArea,
   filterCountriesByName,
-} from '../../src/utils/helpers';
-import { Country } from '../../src/api/types';
-import countriesMock from '../../__mocks__/countriesMock.json';
+} from '../helpers';
+import { Country } from '../../api/types';
+import countriesMock from '../../../__mocks__/countriesMock.json';
 
 const mockCountries = countriesMock as Country[];
 

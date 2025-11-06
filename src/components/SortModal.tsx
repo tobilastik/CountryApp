@@ -13,6 +13,14 @@ import { useTheme } from '../hooks/useTheme';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
+/**
+ * Available sort options for countries
+ * - ascending: Sort by name A-Z
+ * - descending: Sort by name Z-A
+ * - population: Sort by population (highest first)
+ * - area: Sort by area (largest first)
+ * - null: No sorting (original order)
+ */
 export type SortOption = 'ascending' | 'descending' | 'population' | 'area' | null;
 
 interface SortModalProps {

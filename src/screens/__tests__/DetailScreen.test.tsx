@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import { DetailScreen } from '../../src/screens/DetailScreen';
-import { renderWithProviders } from '../utils/testUtils';
-import countriesMock from '../../__mocks__/countriesMock.json';
-import { formatNumber, formatArea } from '../../src/utils/helpers';
+import { DetailScreen } from '../DetailScreen';
+import { renderWithProviders } from '../../utils/testUtils';
+import countriesMock from '../../../__mocks__/countriesMock.json';
+import { formatNumber, formatArea } from '../../utils/helpers';
 
 jest.mock('@react-navigation/native', () => {
   const nativeNav = jest.requireActual('@react-navigation/native');

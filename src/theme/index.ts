@@ -1,10 +1,5 @@
 import { lightColors, darkColors, type ColorScheme } from './colors';
-import {
-  fontFamilies,
-  fontSizes,
-  textStyles,
-  type TextStyle,
-} from './typography';
+import { fontFamilies, fontSizes, textStyles } from './typography';
 import { spacing } from './spacing';
 
 export type ThemeMode = 'light' | 'dark';

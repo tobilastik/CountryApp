@@ -1,8 +1,21 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import { Loader } from '../../src/components/Loader';
+import ReactTestRenderer from 'react-test-renderer';
+import { Loader } from '../Loader';
 
 describe('Loader', () => {
+  it('should match snapshot', () => {
+    const tree = ReactTestRenderer.create(<Loader />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should match snapshot with message', () => {
+    const tree = ReactTestRenderer.create(
+      <Loader message="Loading countries..." />,
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should render loading indicator', () => {
     const { getByTestId } = render(<Loader />);
     const activityIndicator = getByTestId('activity-indicator');

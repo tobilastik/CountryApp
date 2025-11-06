@@ -23,6 +23,8 @@ httpClient.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
+    // In production, these errors should be logged to an error tracking service
+    // such as Sentry, LogRocket
     if (error.response) {
       const status = error.response.status;
       const message = error.message || 'An error occurred';

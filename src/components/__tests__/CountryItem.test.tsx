@@ -1,12 +1,21 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { CountryItem } from '../../src/components/CountryItem';
-import { Country } from '../../src/api/types';
-import countriesMock from '../../__mocks__/countriesMock.json';
+import ReactTestRenderer from 'react-test-renderer';
+import { CountryItem } from '../CountryItem';
+import { Country } from '../../api/types';
+import countriesMock from '../../../__mocks__/countriesMock.json';
 
 const mockCountry = countriesMock[0] as Country;
 
 describe('CountryItem', () => {
+  it('should match snapshot', () => {
+    const onPress = jest.fn();
+    const tree = ReactTestRenderer.create(
+      <CountryItem country={mockCountry} onPress={onPress} />,
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should render country name', () => {
     const onPress = jest.fn();
     const { getByText } = render(

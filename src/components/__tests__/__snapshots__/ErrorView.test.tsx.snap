@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorView should match snapshot 1`] = `null`;
+
+exports[`ErrorView should match snapshot with retry button 1`] = `null`;

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader should match snapshot 1`] = `null`;
+
+exports[`Loader should match snapshot with message 1`] = `null`;

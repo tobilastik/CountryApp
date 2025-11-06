@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar should match snapshot 1`] = `null`;
+
+exports[`SearchBar should match snapshot with value 1`] = `null`;

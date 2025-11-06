@@ -1,8 +1,23 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { SearchBar } from '../../src/components/SearchBar';
+import ReactTestRenderer from 'react-test-renderer';
+import { SearchBar } from '../SearchBar';
 
 describe('SearchBar', () => {
+  it('should match snapshot', () => {
+    const tree = ReactTestRenderer.create(
+      <SearchBar value="" onChangeText={jest.fn()} />,
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should match snapshot with value', () => {
+    const tree = ReactTestRenderer.create(
+      <SearchBar value="France" onChangeText={jest.fn()} />,
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should render with default placeholder', () => {
     const { getByPlaceholderText } = render(
       <SearchBar value="" onChangeText={jest.fn()} />,
