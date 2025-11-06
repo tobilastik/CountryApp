@@ -3,7 +3,6 @@ import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useCountries } from '../hooks/useCountries';
-import { useSearch } from '../hooks/useSearch';
 import { useSort } from '../hooks/useSort';
 import { CountryItem } from '../components/CountryItem';
 import { Loader } from '../components/Loader';
@@ -28,7 +27,7 @@ interface HomeScreenProps {
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const theme = useTheme();
     const { countries, isLoading, isError, error, refetch } = useCountries();
-    const { searchTerm, setSearchTerm } = useSearch();
+    const [searchTerm, setSearchTerm] = useState('');
     const { sort, setSort, sortedCountries } = useSort(countries);
     const [sortModalVisible, setSortModalVisible] = useState(false);
 

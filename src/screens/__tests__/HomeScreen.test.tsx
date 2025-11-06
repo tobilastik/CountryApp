@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, fireEvent } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import { HomeScreen } from '../HomeScreen';
 import { useCountries } from '../../hooks/useCountries';
 import { createMockNavigation, renderWithProviders } from '../../utils/testUtils';

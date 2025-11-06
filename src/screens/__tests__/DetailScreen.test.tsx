@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
 import { DetailScreen } from '../DetailScreen';
 import { renderWithProviders } from '../../utils/testUtils';
 import countriesMock from '../../../__mocks__/countriesMock.json';

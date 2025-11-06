@@ -37,10 +37,6 @@ export const darkTheme: Theme = {
   spacing,
 };
 
-export { lightColors, darkColors } from './colors';
-export { fontFamilies, fontSizes, textStyles } from './typography';
-export { spacing } from './spacing';
-
 export const getTheme = (mode: ThemeMode): Theme => {
   return mode === 'dark' ? darkTheme : lightTheme;
 };
